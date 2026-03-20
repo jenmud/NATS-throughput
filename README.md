@@ -59,6 +59,19 @@ time=2026-03-21T00:08:51.151+11:00 level=INFO msg="-> publish complete" nats.ser
 time=2026-03-21T00:08:52.145+11:00 level=INFO msg="<- consumer complete" nats.server.address=nats://0.0.0.0:39409 clientID=0 msgSize="1.00 MiB" nats.server.address=nats://0.0.0.0:39409 runtime=5.998034332s received=6049 msgPerSec=1209 totalSize="5.91 GiB" throughput="1008.50 MiB/s"
 ```
 
+```bash
+# run with the defaults
+# 1 Consumer
+# 1 Publisher
+# 408Kb message size
+# for 5 seconds duration
+$ ./builds/NATS-throughput -msgSize `expr $((408 * 1024))`
+time=2026-03-21T00:18:58.796+11:00 level=INFO msg="starting up NATS server"
+time=2026-03-21T00:18:58.797+11:00 level=INFO msg="NATS server running and accepting client connections" nats.server.address=nats://0.0.0.0:42615
+time=2026-03-21T00:19:03.801+11:00 level=INFO msg="-> publish complete" nats.server.address=nats://0.0.0.0:42615 msgSize="408.00 KiB" duration=5s runtime=5.003885553s published=15518 msgPerSec=3103 totalSize="6.04 GiB" throughput="1.21 GiB/s"
+time=2026-03-21T00:19:04.795+11:00 level=INFO msg="<- consumer complete" nats.server.address=nats://0.0.0.0:42615 clientID=0 msgSize="408.00 KiB" nats.server.address=nats://0.0.0.0:42615 runtime=5.997756539s received=15518 msgPerSec=3103 totalSize="6.04 GiB" throughput="1.01 GiB/s"
+```
+
 ## Help
 
 ```bash
