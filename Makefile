@@ -1,6 +1,8 @@
 CONSUMERS=1
 
-.PHONY: run vendor
+
+.PHONY: run vendor build
+
 
 vendor:
 	go mod tidy
@@ -9,3 +11,7 @@ vendor:
 
 run:
 	@go run . -consumers=$(CONSUMERS)
+
+
+build:
+	@go build -o builds/NATS-throughput
