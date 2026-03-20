@@ -58,3 +58,20 @@ time=2026-03-21T00:08:46.147+11:00 level=INFO msg="NATS server running and accep
 time=2026-03-21T00:08:51.151+11:00 level=INFO msg="-> publish complete" nats.server.address=nats://0.0.0.0:39409 msgSize="1.00 MiB" duration=5s runtime=5.00311448s published=6049 msgPerSec=1209 totalSize="5.91 GiB" throughput="1.18 GiB/s"
 time=2026-03-21T00:08:52.145+11:00 level=INFO msg="<- consumer complete" nats.server.address=nats://0.0.0.0:39409 clientID=0 msgSize="1.00 MiB" nats.server.address=nats://0.0.0.0:39409 runtime=5.998034332s received=6049 msgPerSec=1209 totalSize="5.91 GiB" throughput="1008.50 MiB/s"
 ```
+
+## Help
+
+```bash
+$ ./builds/NATS-throughput -h
+Usage of ./builds/NATS-throughput:
+  -consumers int
+        how many consumer clients to start (default 1)
+  -duration duration
+        time duration to run the test (default 5s)
+  -level string
+        logging level [info|warn|error|debug] (default "info")
+  -msgSize int
+        message size in bytes to publish, default is 1MiB (default 1048576)
+  -port int
+        port to start the NATS server, default is a random available port. (default -1)
+```
