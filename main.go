@@ -98,7 +98,7 @@ func publish(address string, d time.Duration, msgSize int64) {
 		slog.String("duration", d.String()),
 	)
 
-	logger.Info("starting to publish messages")
+	logger.Debug("starting to publish messages")
 
 	var sent int64
 	start := time.Now()
@@ -111,7 +111,7 @@ func publish(address string, d time.Duration, msgSize int64) {
 		totalBytes := sent * msgSize
 
 		logger.Info(
-			"publish complete",
+			"-> publish complete",
 			slog.String("runtime", runtime.String()),
 			slog.Int64("published", sent),
 			slog.Int64("msgPerSec", sent/int64(runtime.Seconds())),
@@ -163,13 +163,15 @@ func consumers(ctx context.Context, address string, clients int, msgSize int64) 
 			if err != nil {
 				panic(err)
 			}
+
 			defer nc.Close()
 
-			logger.Info("starting consumer")
+			logger.Debug("starting consumer")
 
 			sub, err := nc.Subscribe(subject, func(msg *nats.Msg) {
 				atomic.AddInt64(&received, 1)
 			})
+
 			if err != nil {
 				panic(err)
 			}
@@ -182,7 +184,7 @@ func consumers(ctx context.Context, address string, clients int, msgSize int64) 
 				totalBytes := count * msgSize
 
 				logger.Info(
-					"consumer complete",
+					"<- consumer complete",
 					slog.String("runtime", runtime.String()),
 					slog.Int64("received", count),
 					slog.Int64("msgPerSec", count/int64(runtime.Seconds())),

@@ -1,3 +1,5 @@
+CONSUMERS=1
+
 .PHONY: run vendor
 
 vendor:
@@ -6,4 +8,4 @@ vendor:
 
 
 run:
-	go run .
+	@go run . -consumers=$(CONSUMERS)
