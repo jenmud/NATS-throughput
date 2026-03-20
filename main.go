@@ -18,6 +18,7 @@ import (
 
 const subject string = "demo"
 
+// setupLogger will setup the default logger.
 func setupLogger(level string) {
 	l := slog.LevelInfo
 
@@ -84,6 +85,7 @@ func startClient(address string) (*nats.Conn, error) {
 	return nats.Connect(address)
 }
 
+// publish will publish message with the given size for the specified duration.
 func publish(address string, d time.Duration, msgSize int64) {
 	nc, err := startClient(address)
 	if err != nil {
@@ -200,6 +202,7 @@ func consumers(ctx context.Context, address string, clients int, msgSize int64) 
 	wg.Wait()
 }
 
+// main is the main entrypoint
 func main() {
 	clients := flag.Int("consumers", 1, "how many consumer clients to start")
 	dur := flag.Duration("duration", 5*time.Second, "time duration to run the test")
